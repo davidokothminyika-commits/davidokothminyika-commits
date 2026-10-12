@@ -10,4 +10,6 @@ I've been learning backend web develoment for 2months from the time I'm writing 
 *   ✉️  You can contact me at [davidokothminyika@gmal.com](mailto:davidokothminyika@gmal.com)
 *   🧠  I'm currently learning nodejs
 *   👥  I'm looking to collaborate on any backend project with nodejs
-*   💬  Ask me about Also good at teamleadership
+*   💬  Ask me about Team leadership, webframeworks, DevOps
+
+[![Anurag's GitHub stats](https://github-stats-extended.vercel.app/api?username=davidokothminyika-commits)](https://github.com/stats-organization/github-stats-extended)
