@@ -2,13 +2,18 @@
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { loadConfig, PROJECT_ROOT } from '../src/config/index.js';
-import { stageOutputs, publishStaged, PublishError } from '../src/publisher/index.js';
+import {
+  stageOutputs,
+  publishStaged,
+  PublishError,
+  resolveThreeDimensionalPublish,
+} from '../src/publisher/index.js';
 import { validateSvg } from '../src/generators/index.js';
 
 try {
   const config = loadConfig();
 
-  const threeDimensional = config.rendering.assets.threeDimensional;
+  const threeDimensional = resolveThreeDimensionalPublish(config);
   const outputs = [];
 
   for (const target of threeDimensional.targets) {
@@ -37,7 +42,7 @@ try {
 
   const staged = await stageOutputs({
     outputs,
-    stagingDirectory: config.output.stagingDirectory,
+    stagingDirectory: threeDimensional.stagingDirectory,
     rootDir: PROJECT_ROOT,
   });
   const published = await publishStaged({ staged, rootDir: PROJECT_ROOT });

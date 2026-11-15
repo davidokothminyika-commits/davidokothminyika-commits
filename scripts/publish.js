@@ -6,7 +6,12 @@ import { loadEnv } from '../src/config/env.js';
 import { createGitHubClients } from '../src/api/index.js';
 import { runProfilePipeline } from '../src/pipeline/index.js';
 import { createLogger } from '../src/utils/logger.js';
-import { stageOutputs, publishStaged, PublishError } from '../src/publisher/index.js';
+import {
+  stageOutputs,
+  publishStaged,
+  PublishError,
+  resolvePublishTargets,
+} from '../src/publisher/index.js';
 import { buildTemplateContext } from '../src/templates/index.js';
 import {
   generateBannerSvg,
@@ -82,15 +87,17 @@ try {
     );
   }
 
+  const targets = resolvePublishTargets(config);
+
   const outputs = [
-    { target: config.output.readme, content: markdown },
-    { target: config.assets.banner, content: bannerSvg },
-    { target: config.assets.languageChart, content: languageChartSvg },
+    { target: targets.readme, content: markdown },
+    { target: targets.banner, content: bannerSvg },
+    { target: targets.languageChart, content: languageChartSvg },
   ];
 
   const staged = await stageOutputs({
     outputs,
-    stagingDirectory: config.output.stagingDirectory,
+    stagingDirectory: targets.stagingDirectory,
     rootDir: PROJECT_ROOT,
   });
   const published = await publishStaged({ staged, rootDir: PROJECT_ROOT });
