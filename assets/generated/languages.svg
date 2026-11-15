@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="288" viewBox="0 0 860 288" role="img" aria-label="Language chart">
+  <rect width="860" height="288" fill="#070B16"/>
+  <rect x="40" y="24" width="339.012" height="18" fill="#22D3EE"/>
+  <text x="387" y="42" font-family="sans-serif" font-size="12" fill="#E2E8F0">JavaScript</text>
+  <text x="810" y="42" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">39.42%</text>
+  <rect x="40" y="54" width="313.298" height="18" fill="#22D3EE"/>
+  <text x="361" y="72" font-family="sans-serif" font-size="12" fill="#E2E8F0">HTML</text>
+  <text x="810" y="72" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">36.43%</text>
+  <rect x="40" y="84" width="84.108" height="18" fill="#22D3EE"/>
+  <text x="132" y="102" font-family="sans-serif" font-size="12" fill="#E2E8F0">TypeScript</text>
+  <text x="810" y="102" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">9.78%</text>
+  <rect x="40" y="114" width="76.712" height="18" fill="#22D3EE"/>
+  <text x="125" y="132" font-family="sans-serif" font-size="12" fill="#E2E8F0">Kotlin</text>
+  <text x="810" y="132" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">8.92%</text>
+  <rect x="40" y="144" width="24.939999999999998" height="18" fill="#22D3EE"/>
+  <text x="73" y="162" font-family="sans-serif" font-size="12" fill="#E2E8F0">C</text>
+  <text x="810" y="162" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">2.90%</text>
+  <rect x="40" y="174" width="7.396" height="18" fill="#22D3EE"/>
+  <text x="55" y="192" font-family="sans-serif" font-size="12" fill="#E2E8F0">CSS</text>
+  <text x="810" y="192" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">0.86%</text>
+  <rect x="40" y="204" width="5.7620000000000005" height="18" fill="#22D3EE"/>
+  <text x="54" y="222" font-family="sans-serif" font-size="12" fill="#E2E8F0">Shell</text>
+  <text x="810" y="222" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">0.67%</text>
+  <rect x="40" y="234" width="4.3" height="18" fill="#22D3EE"/>
+  <text x="52" y="252" font-family="sans-serif" font-size="12" fill="#E2E8F0">EJS</text>
+  <text x="810" y="252" text-anchor="end" font-family="sans-serif" font-size="12" fill="#94A3B8">0.50%</text>
+  <line x1="40" y1="280" x2="820" y2="280" stroke="#1E293B"/>
+</svg>
