@@ -1,0 +1,86 @@
+name: Publish profile README
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 5 * * 0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Generate and publish profile assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 26
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify authenticated GitHub access
+        run: npm run auth:check
+        env:
+          PROFILE_GITHUB_TOKEN: ${{ secrets.PROFILE_GITHUB_TOKEN }}
+
+      - name: Generate, validate and publish profile assets
+        run: npm run publish
+        env:
+          PROFILE_GITHUB_TOKEN: ${{ secrets.PROFILE_GITHUB_TOKEN }}
+
+      - name: Write 3D contribution graph settings
+        run: |
+          mkdir -p build/settings
+          printf '%s' '{"type":"normal","fileName":"profile-3d-contrib.svg","backgroundColor":"#070b16","foregroundColor":"#e2e8f0","strongColor":"#22d3ee","weakColor":"#334155","radarColor":"#34d399","growingAnimation":false,"contribColors":["#111c31","#164e63","#0e7490","#06b6d4","#22d3ee"]}' > build/settings/midnight.json
+          printf '%s' '{"type":"normal","fileName":"profile-3d-contrib-night.svg","backgroundColor":"#020617","foregroundColor":"#c7d2fe","strongColor":"#818cf8","weakColor":"#1e293b","radarColor":"#22d3ee","growingAnimation":false,"contribColors":["#0f172a","#1e1b4b","#312e81","#4338ca","#6366f1"]}' > build/settings/night.json
+          printf '%s' '{"type":"normal","fileName":"profile-3d-contrib-purple.svg","backgroundColor":"#0b0616","foregroundColor":"#ede9fe","strongColor":"#c084fc","weakColor":"#3b2a5a","radarColor":"#a78bfa","growingAnimation":false,"contribColors":["#160d27","#2e1065","#4c1d95","#6d28d9","#8b5cf6"]}' > build/settings/purple.json
+
+      - name: Generate 3D contribution graph (midnight)
+        uses: yoshi389111/github-profile-3d-contrib@7d95e7d4cdc028dd1e1cbd957d65f35efb12ae39
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+          MAX_REPOS: '100'
+          SETTING_JSON: build/settings/midnight.json
+
+      - name: Generate 3D contribution graph (night)
+        uses: yoshi389111/github-profile-3d-contrib@7d95e7d4cdc028dd1e1cbd957d65f35efb12ae39
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+          MAX_REPOS: '100'
+          SETTING_JSON: build/settings/night.json
+
+      - name: Generate 3D contribution graph (purple)
+        uses: yoshi389111/github-profile-3d-contrib@7d95e7d4cdc028dd1e1cbd957d65f35efb12ae39
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.repository_owner }}
+          MAX_REPOS: '100'
+          SETTING_JSON: build/settings/purple.json
+
+      - name: Publish 3D contribution graph
+        run: npm run publish:3d
+
+      - name: Commit and publish generated profile assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md assets/generated assets/3d
+          if git diff --cached --quiet; then
+            echo "No generated profile changes to publish."
+          else
+            git commit -m "chore(profile): publish generated profile assets"
+            git push origin HEAD:${{ github.ref }}
+          fi

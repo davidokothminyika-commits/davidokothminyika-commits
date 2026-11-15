@@ -1,0 +1,39 @@
+# {{name}}
+
+{{headline}}
+
+{{location}}
+
+My name is {{name}} and today is {{date}}.
+
+## About
+
+{{#about}}
+- {{.}}
+{{/about}}
+
+## Languages
+
+{{#languages}}
+- {{name}}: {{displayPercentage}}%
+{{/languages}}
+
+## Statistics
+
+- Stars: {{statistics.stars}}
+- Forks: {{statistics.forks}}
+- Contributions: {{statistics.contributions.total}}
+
+## Featured repositories
+
+{{#featured}}
+- {{fullName}} — {{stars}} stars and {{forks}} forks
+{{/featured}}
+
+## Recent activity
+
+{{#activity}}
+- {{type}} on {{repository}} at {{createdAt}}
+{{/activity}}
+
+Activity complete: {{activityComplete}}

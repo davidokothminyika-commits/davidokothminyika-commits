@@ -1,0 +1,52 @@
+{
+  "github": {
+    "username": "davidokothminyika-commits",
+    "repository": "davidokothminyika-commits",
+    "profileUrl": "https://github.com/davidokothminyika-commits"
+  },
+  "identity": {
+    "name": "David Okoth Minyka",
+    "headline": "Full-stack developer · Node.js, Express, React & MySQL",
+    "location": "Kisumu, Kenya",
+    "about": [
+      "I am a full-stack developer building web applications with Node.js, Express, React, and MySQL.",
+      "I learn by shipping working software: authentication flows, reservation systems, and API-driven projects.",
+      "Ask me about team leadership, web frameworks, and DevOps. I am open to collaborating on Node.js and backend projects."
+    ]
+  },
+  "contact": {
+    "email": "davidokothminyika@gmail.com"
+  },
+  "socials": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/davidokothminyika-commits",
+      "icon": "github"
+    },
+    {
+      "label": "Email",
+      "url": "mailto:davidokothminyika@gmail.com",
+      "icon": "mail"
+    }
+  ],
+  "technology": [
+    {
+      "group": "Backend",
+      "items": ["Node.js", "Express", "MySQL"]
+    },
+    {
+      "group": "Frontend",
+      "items": ["React", "JavaScript", "HTML"]
+    },
+    {
+      "group": "Languages & tooling",
+      "items": ["Kotlin", "Shell", "Git", "GitHub Actions", "VS Code"]
+    }
+  ],
+  "featured": {
+    "mode": "automatic",
+    "repositories": [],
+    "exclude": ["davidokothminyika-commits"],
+    "limit": 4
+  }
+}

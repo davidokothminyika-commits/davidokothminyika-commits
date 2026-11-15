@@ -1,0 +1,9 @@
+node_modules/
+coverage/
+build/
+data/
+dist/
+profile-3d-contrib/
+assets/3d/*.svg
+README.md
+package-lock.json

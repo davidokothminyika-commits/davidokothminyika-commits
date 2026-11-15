@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# Build and collection scratch space. Raw API data may contain private metadata
+# and must never be committed or published.
+build/
+data/
+coverage/
+dist/
+.cache/
+*.log
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Temporary generator output before validation
+profile-3d-contrib/

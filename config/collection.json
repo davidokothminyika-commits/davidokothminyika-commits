@@ -1,0 +1,36 @@
+{
+  "visibility": "all",
+  "affiliation": "owner",
+  "includeForks": false,
+  "includeArchived": false,
+  "includeEmpty": true,
+  "excludeRepositories": [],
+  "pagination": {
+    "perPage": 100,
+    "maxPages": 20
+  },
+  "languages": {
+    "concurrency": 4,
+    "includePrivate": true,
+    "failurePolicy": "fail"
+  },
+  "requireOwnerMatch": true,
+  "requirePrivateCoverage": true,
+  "publish": {
+    "privateRepositoryCount": false,
+    "privateLanguageBreakdown": false,
+    "privateRepositoryNames": false
+  },
+  "recentActivity": {
+    "limit": 5,
+    "maxAgeDays": 90,
+    "maxPages": 3
+  },
+  "contributions": {
+    "windowDays": 365,
+    "maxRepositories": 100
+  },
+  "featuredRepositories": {
+    "allowForks": false
+  }
+}

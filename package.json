@@ -1,0 +1,52 @@
+{
+  "name": "davidokothminyika-profile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Automated GitHub developer profile for davidokothminyika-commits",
+  "type": "module",
+  "engines": {
+    "node": ">=26.0.0",
+    "npm": ">=11.0.0"
+  },
+  "packageManager": "npm@12.2.1",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "validate:config": "node scripts/validate-config.js",
+    "auth:check": "node scripts/check-auth.js",
+    "collect": "node scripts/collect.js",
+    "publish": "node scripts/publish.js",
+    "publish:3d": "node scripts/publish-3d.js",
+    "validate": "npm run validate:config && npm run lint && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidokothminyika-commits/davidokothminyika-commits.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidokothminyika-commits/davidokothminyika-commits/issues"
+  },
+  "homepage": "https://github.com/davidokothminyika-commits",
+  "dependencies": {
+    "@octokit/graphql": "9.0.5",
+    "@octokit/plugin-retry": "8.1.1",
+    "@octokit/plugin-throttling": "11.0.5",
+    "@octokit/rest": "22.0.1",
+    "mustache": "4.2.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@vitest/coverage-v8": "5.1.0",
+    "eslint": "10.15.0",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "17.14.0",
+    "prettier": "3.10.1",
+    "vitest": "5.1.0"
+  }
+}
