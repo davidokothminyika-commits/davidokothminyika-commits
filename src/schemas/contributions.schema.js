@@ -46,7 +46,6 @@ export const contributionsCollectionSchema = z.object({
   totalPullRequestReviewContributions: nonNegativeInteger,
   totalRepositoryContributions: nonNegativeInteger,
   restrictedContributionsCount: nonNegativeInteger,
-  totalContributions: nonNegativeInteger,
   contributionCalendar: contributionCalendarSchema,
   commitContributionsByRepository: z
     .array(commitContributionsByRepositorySchema)

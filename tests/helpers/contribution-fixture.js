@@ -13,7 +13,6 @@ export function buildContributionResponse({
   fromDate,
   toDate,
   counts = {},
-  totalContributions = null,
   restrictedContributions = 0,
   totalCommitContributions = null,
   totalIssueContributions = 0,
@@ -34,7 +33,6 @@ export function buildContributionResponse({
   }
 
   const calendarTotal = days.reduce((total, day) => total + day.contributionCount, 0);
-  const total = totalContributions ?? calendarTotal;
 
   const weeks = [];
   for (let index = 0; index < days.length; index += 7) {
@@ -47,15 +45,14 @@ export function buildContributionResponse({
       contributionsCollection: {
         startedAt,
         endedAt,
-        totalCommitContributions: totalCommitContributions ?? total,
+        totalCommitContributions: totalCommitContributions ?? calendarTotal,
         totalIssueContributions,
         totalPullRequestContributions,
         totalPullRequestReviewContributions,
         totalRepositoryContributions,
         restrictedContributionsCount: restrictedContributions,
-        totalContributions: total,
         contributionCalendar: {
-          totalContributions: total,
+          totalContributions: calendarTotal,
           weeks,
         },
         commitContributionsByRepository: repositories.map((repository) => ({

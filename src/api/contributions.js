@@ -15,7 +15,6 @@ const CONTRIBUTIONS_QUERY = `query ProfileContributions($from: DateTime!, $to: D
       totalPullRequestReviewContributions
       totalRepositoryContributions
       restrictedContributionsCount
-      totalContributions
       contributionCalendar {
         totalContributions
         weeks {
@@ -146,15 +145,9 @@ export async function fetchContributionCollection({
     );
   }
 
-  if (collection.totalContributions !== collection.contributionCalendar.totalContributions) {
-    throw responseError(
-      'GITHUB_INCONSISTENT_CONTRIBUTION_CALENDAR',
-      'GitHub returned conflicting contribution totals during contribution collection. ' +
-        'Collection cannot continue with inconsistent data.',
-    );
-  }
-
-  if (collection.restrictedContributionsCount > collection.totalContributions) {
+  if (
+    collection.restrictedContributionsCount > collection.contributionCalendar.totalContributions
+  ) {
     throw responseError(
       'GITHUB_INCONSISTENT_CONTRIBUTION_CALENDAR',
       'GitHub reported more restricted contributions than total contributions. ' +
@@ -169,7 +162,7 @@ export async function fetchContributionCollection({
     collection.totalPullRequestReviewContributions,
     collection.totalRepositoryContributions,
   ];
-  if (categoryTotals.some((value) => value > collection.totalContributions)) {
+  if (categoryTotals.some((value) => value > collection.contributionCalendar.totalContributions)) {
     throw responseError(
       'GITHUB_INCONSISTENT_CONTRIBUTION_CALENDAR',
       'GitHub reported a contribution category larger than the total. ' +
@@ -249,7 +242,7 @@ export async function fetchContributionCollection({
       endedAt: collection.endedAt,
     }),
     totals: Object.freeze({
-      contributions: collection.totalContributions,
+      contributions: collection.contributionCalendar.totalContributions,
       commits: collection.totalCommitContributions,
       issues: collection.totalIssueContributions,
       pullRequests: collection.totalPullRequestContributions,

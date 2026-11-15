@@ -51,6 +51,37 @@ describe('fetchContributionCollection', () => {
     expect(Object.isFrozen(result.commitContributionsByRepository[0])).toBe(true);
   });
 
+  it('does not request a field that does not exist on the collection type', async () => {
+    const graphql = vi.fn(createContributionGraphql());
+
+    await fetchContributionCollection({ graphql, from: FROM, to: TO });
+
+    const query = graphql.mock.calls[0][0];
+    expect(query).toContain('contributionCalendar');
+    expect(query.match(/totalContributions/g)).toHaveLength(1);
+    expect(query).toMatch(/contributionCalendar\s*{\s*totalContributions/);
+    expect(query).not.toMatch(/restrictedContributionsCount\s*\n\s*totalContributions/);
+    expect(query).not.toContain('totalRepositoryContributions\n      totalContributions');
+  });
+
+  it('rejects a response with an invalid or missing calendar total', async () => {
+    const response = buildContributionResponse({ fromDate: '2025-11-15', toDate: '2026-11-15' });
+    delete response.viewer.contributionsCollection.contributionCalendar.totalContributions;
+
+    await expect(
+      fetchContributionCollection({ graphql: async () => response, from: FROM, to: TO }),
+    ).rejects.toMatchObject({ code: 'GITHUB_INVALID_CONTRIBUTION_RESPONSE' });
+  });
+
+  it('rejects a response with an invalid calendar total', async () => {
+    const response = buildContributionResponse({ fromDate: '2025-11-15', toDate: '2026-11-15' });
+    response.viewer.contributionsCollection.contributionCalendar.totalContributions = Number.NaN;
+
+    await expect(
+      fetchContributionCollection({ graphql: async () => response, from: FROM, to: TO }),
+    ).rejects.toMatchObject({ code: 'GITHUB_INVALID_CONTRIBUTION_RESPONSE' });
+  });
+
   it('sends the requested window and repository cap to GraphQL', async () => {
     const graphql = vi.fn(createContributionGraphql());
 

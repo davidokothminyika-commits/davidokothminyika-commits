@@ -134,10 +134,26 @@ function safeDocumentationUrl(value) {
   return typeof value === 'string' && value.startsWith('https://docs.github.com/') ? value : null;
 }
 
+const GRAPHQL_VALIDATION_EXTENSION_CODES = new Set([
+  'GRAPHQL_VALIDATION_FAILED',
+  'GRAPHQL_PARSE_FAILED',
+]);
+
 function graphqlTypes(error) {
   if (!Array.isArray(error?.errors)) return [];
   return [
     ...new Set(error.errors.map((item) => item?.type).filter((type) => typeof type === 'string')),
+  ];
+}
+
+function graphqlValidationCodes(error) {
+  if (!Array.isArray(error?.errors)) return [];
+  return [
+    ...new Set(
+      error.errors
+        .map((item) => item?.extensions?.code)
+        .filter((code) => typeof code === 'string' && code.trim() !== ''),
+    ),
   ];
 }
 
@@ -196,6 +212,20 @@ export function normalizeApiError(error, { operation = 'GitHub API request' } = 
     return new GitHubApiError(
       `GitHub was unavailable while attempting ${operation} (${status}). Retry the run later.`,
       { ...shared, code: 'GITHUB_SERVER_ERROR' },
+    );
+  }
+
+  // GraphQL validation failures arrive with HTTP 200, no top-level error type,
+  // and the validation code under `extensions.code`. Map them to a distinct
+  // stable code instead of a generic network failure.
+  const validationCode = graphqlValidationCodes(error).find((code) =>
+    GRAPHQL_VALIDATION_EXTENSION_CODES.has(code),
+  );
+  if (validationCode !== undefined) {
+    return new GitHubApiError(
+      `GitHub rejected the GraphQL query during ${operation} (type: ${validationCode}). ` +
+        'The query does not match the GitHub GraphQL schema.',
+      { ...shared, code: 'GITHUB_GRAPHQL_VALIDATION' },
     );
   }
 

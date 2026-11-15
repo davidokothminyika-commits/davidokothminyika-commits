@@ -93,6 +93,45 @@ describe('normalizeApiError', () => {
     expect(error.message).toContain('contribution collection');
   });
 
+  it('maps untyped GraphQL validation failures to a distinct code', () => {
+    const privateName = 'secret-repository';
+    const raw = {
+      name: 'GraphqlResponseError',
+      headers: { 'x-github-request-id': 'GQL-REQUEST' },
+      errors: [
+        {
+          message: `Cannot query field 'totalContributions' on type 'ContributionsCollection': ${privateName}`,
+          extensions: { code: 'GRAPHQL_VALIDATION_FAILED' },
+        },
+      ],
+      data: { repository: { name: privateName } },
+    };
+
+    const error = normalizeApiError(raw, { operation: 'contribution collection' });
+
+    expect(error).toMatchObject({
+      code: 'GITHUB_GRAPHQL_VALIDATION',
+      requestId: 'GQL-REQUEST',
+    });
+    expect(error.message).toContain('contribution collection');
+    expect(error.message).toContain('GRAPHQL_VALIDATION_FAILED');
+    expect(error.message).not.toContain(privateName);
+    expect(error.message).not.toContain("totalContributions'");
+    expect(JSON.stringify(error)).not.toContain(privateName);
+  });
+
+  it('maps GraphQL syntax failures to the same distinct code', () => {
+    const raw = {
+      name: 'GraphqlResponseError',
+      headers: {},
+      errors: [{ message: 'Field is not reachable', extensions: { code: 'GRAPHQL_PARSE_FAILED' } }],
+    };
+
+    const error = normalizeApiError(raw, { operation: 'contribution collection' });
+
+    expect(error).toMatchObject({ code: 'GITHUB_GRAPHQL_VALIDATION' });
+  });
+
   it('maps GraphQL error types without echoing server messages', () => {
     const privateName = 'secret-repository';
     const raw = {
