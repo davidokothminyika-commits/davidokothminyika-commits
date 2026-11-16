@@ -6,7 +6,7 @@ Full-stack developer · Node.js, Express, React &amp; MySQL
 
 Kisumu, Kenya
 
-My name is David Okoth Minyka and today is Monday, 16 November 2026 at 07:26:19 GMT+3.
+My name is David Okoth Minyka and today is Monday, 16 November 2026 at 08:12:16 GMT+3.
 
 ## About
 
@@ -16,7 +16,24 @@ My name is David Okoth Minyka and today is Monday, 16 November 2026 at 07:26:19 
 
 ## Tech stack
 
-<img src="assets/generated/tech-stack.svg" alt="Tech stack: Backend: Node.js, Express, MySQL; Frontend: React, JavaScript, HTML; Languages &amp; tooling: Kotlin, Shell, Git, GitHub Actions, VS Code" width="860">
+**Backend**
+
+<a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=nodejs,express,mysql&theme=dark&perline=3" alt="Backend: Node.js, Express, MySQL" /></a>
+
+- Node.js, Express, MySQL
+
+**Frontend**
+
+<a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=react,js,html&theme=dark&perline=3" alt="Frontend: React, JavaScript, HTML" /></a>
+
+- React, JavaScript, HTML
+
+**Languages &amp; tooling**
+
+<a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=kotlin,bash,git,githubactions,vscode&theme=dark&perline=5" alt="Languages &amp; tooling: Kotlin, Shell, Git, GitHub Actions, VS Code" /></a>
+
+- Kotlin, Shell, Git, GitHub Actions, VS Code
+
 
 ## Currently working on
 
@@ -45,7 +62,7 @@ My name is David Okoth Minyka and today is Monday, 16 November 2026 at 07:26:19 
 
 - Stars: 5
 - Forks: 0
-- Contributions: 322
+- Contributions: 323
 
 ## Featured repositories
 
@@ -79,4 +96,4 @@ Open to collaborating on Node.js and backend projects.
 
 *Generated automatically from my GitHub activity by the automated profile pipeline.*
 
-*Last updated: Monday, 16 November 2026 at 07:26:19 GMT+3*
+*Last updated: Monday, 16 November 2026 at 08:12:16 GMT+3*
