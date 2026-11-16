@@ -7,7 +7,7 @@ describe('validateMarkdown', () => {
   it('accepts a well-formed generated README', () => {
     const result = validateMarkdown({
       markdown:
-        '# David Okoth Minyka\n\nMy name is David Okoth Minyka and today is Sunday 15 November.\n',
+        '# David Okoth Minyika\n\nMy name is David Okoth Minyika and today is Sunday 15 November.\n',
       repositories: [createRepository()],
     });
 

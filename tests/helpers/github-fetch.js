@@ -29,7 +29,7 @@ export function createUser(overrides = {}) {
     login: 'davidokothminyika-commits',
     id: 238948285,
     type: 'User',
-    name: 'David Okoth Minyka',
+    name: 'David Okoth Minyika',
     public_repos: 7,
     total_private_repos: 2,
     owned_private_repos: 2,

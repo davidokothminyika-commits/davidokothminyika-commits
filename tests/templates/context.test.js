@@ -7,7 +7,7 @@ import { createPrivateRepository, createRepository } from '../helpers/repository
 const CONFIG = {
   profile: {
     identity: {
-      name: 'David Okoth Minyka',
+      name: 'David Okoth Minyika',
       headline: 'Full-stack developer',
       location: 'Kisumu, Kenya',
       about: ['Shipping software with Node.js.'],
@@ -61,11 +61,11 @@ describe('buildTemplateContext', () => {
         languages: { languages: [{ name: 'JavaScript', displayPercentage: 80 }] },
         featured: [{ fullName: 'davidokothminyika-commits/public-project', stars: 4, forks: 1 }],
       },
-      identity: { name: 'David Okoth Minyka' },
+      identity: { name: 'David Okoth Minyika' },
       now: new Date('2026-11-15T09:12:00Z'),
     });
 
-    expect(context.name).toBe('David Okoth Minyka');
+    expect(context.name).toBe('David Okoth Minyika');
     expect(context.headline).toBe('Full-stack developer');
     expect(context.location).toBe('Kisumu, Kenya');
     expect(context.about).toEqual(['Shipping software with Node.js.']);
@@ -82,7 +82,7 @@ describe('buildTemplateContext', () => {
     const context = buildTemplateContext({
       config: CONFIG,
       publicPayload: {},
-      identity: { name: 'David Okoth Minyka' },
+      identity: { name: 'David Okoth Minyika' },
     });
 
     expect(context.techStackGroups).toEqual([
@@ -116,7 +116,7 @@ describe('buildTemplateContext', () => {
         },
       },
       publicPayload: {},
-      identity: { name: 'David Okoth Minyka' },
+      identity: { name: 'David Okoth Minyika' },
     });
 
     for (const group of context.techStackGroups) {
@@ -147,7 +147,7 @@ describe('buildTemplateContext', () => {
         },
       },
       publicPayload: {},
-      identity: { name: 'David Okoth Minyka' },
+      identity: { name: 'David Okoth Minyika' },
     });
 
     expect(context.techStackGroups).toHaveLength(1);
@@ -174,7 +174,7 @@ describe('buildTemplateContext', () => {
         },
       },
       publicPayload: {},
-      identity: { name: 'David Okoth Minyka' },
+      identity: { name: 'David Okoth Minyika' },
     });
 
     expect(context.techStackGroups[0].perline).toBe(3);

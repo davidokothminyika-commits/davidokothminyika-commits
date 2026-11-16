@@ -51,7 +51,7 @@ function renderWith(config) {
   const context = buildTemplateContext({
     config,
     publicPayload: PAYLOAD,
-    identity: { name: 'David Okoth Minyka' },
+    identity: { name: 'David Okoth Minyika' },
     now: new Date('2026-11-15T12:00:00Z'),
   });
 
@@ -72,7 +72,7 @@ describe('generated profile README', () => {
     const { markdown } = renderWith(config);
 
     expect(markdown).toContain('<img src="assets/generated/banner.svg"');
-    expect(markdown).toContain('alt="David Okoth Minyka — Full-stack developer');
+    expect(markdown).toContain('alt="David Okoth Minyika — Full-stack developer');
   });
 
   it('embeds the language chart with alt text', () => {

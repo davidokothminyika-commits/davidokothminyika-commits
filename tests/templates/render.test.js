@@ -6,10 +6,10 @@ describe('renderTemplate', () => {
   it('renders simple placeholders from the context', () => {
     const markdown = renderTemplate({
       source: 'My name is {{name}} and today is {{date}}.',
-      context: { name: 'David Okoth Minyka', date: 'Sunday 15 November' },
+      context: { name: 'David Okoth Minyika', date: 'Sunday 15 November' },
     });
 
-    expect(markdown).toBe('My name is David Okoth Minyka and today is Sunday 15 November.');
+    expect(markdown).toBe('My name is David Okoth Minyika and today is Sunday 15 November.');
   });
 
   it('renders array sections', () => {

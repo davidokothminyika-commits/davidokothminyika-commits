@@ -56,6 +56,7 @@ try {
     height: 220,
     colors: config.rendering.theme.colors,
     title: config.profile.identity.name,
+    subtitle: config.profile.identity.headline,
   });
   const bannerValidation = validateSvg({
     svg: bannerSvg,

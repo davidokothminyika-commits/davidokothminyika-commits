@@ -90,7 +90,7 @@ describe('verifyAuthenticatedUser', () => {
     expect(identity).toEqual({
       login: 'davidokothminyika-commits',
       id: 238948285,
-      name: 'David Okoth Minyka',
+      name: 'David Okoth Minyika',
       type: 'User',
       publicRepositoryCount: 7,
       ownedPrivateRepositoryCount: 2,

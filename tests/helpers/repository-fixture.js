@@ -47,7 +47,7 @@ export function createIdentity(overrides = {}) {
   return {
     login: DEFAULT_LOGIN,
     id: 238948285,
-    name: 'David Okoth Minyka',
+    name: 'David Okoth Minyika',
     type: 'User',
     publicRepositoryCount: 1,
     ownedPrivateRepositoryCount: 0,
