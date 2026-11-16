@@ -4,12 +4,13 @@
  * Sources and licences
  * --------------------
  * Simple Icons (https://github.com/simple-icons/simple-icons) — the collection is
- * released under CC0 1.0 Universal (see upstream `LICENSE.md`). Individual icons
- * documented upstream carry their own licence metadata: `JavaScript` and `GNU Bash`
- * are MIT (per upstream `data/simple-icons.json`); all other Simple Icons entries
- * here have NO individual licence metadata recorded upstream, so we treat their
- * per-icon licence as unspecified rather than assuming it matches the collection
- * licence. We use each logo solely to identify the language it represents.
+ * released under CC0 1.0 Universal (see upstream `LICENSE.md`). Some individual icons
+ * carry their own licence metadata in the pinned upstream `data/simple-icons.json`:
+ * `JavaScript` and `GNU Bash` are MIT, `PHP` and `Rust` are CC-BY-SA-4.0, and
+ * `Ruby` is CC-BY-SA-2.5. The remaining 18 Simple Icons entries here have NO
+ * individual licence field in that metadata, so we treat their per-icon licence as
+ * unspecified rather than assuming it matches the collection licence. We use each logo
+ * solely to identify the language it represents.
  *
  * Devicon (https://github.com/devicons/devicon) — MIT License.
  *
@@ -121,7 +122,7 @@ const ICONS = Object.freeze({
   Rust: {
     source:
       'https://raw.githubusercontent.com/simple-icons/simple-icons/17cd4ee07612198a1d8777a060d4100423762a8b/icons/rust.svg',
-    license: 'simple-icons CC0-1.0 collection; per-icon licence unspecified',
+    license: 'simple-icons CC0-1.0 collection; per-icon CC-BY-SA-4.0 (upstream data)',
     viewBox: '0 0 24 24',
     fill: '#000000',
     paths: [
@@ -131,7 +132,7 @@ const ICONS = Object.freeze({
   Ruby: {
     source:
       'https://raw.githubusercontent.com/simple-icons/simple-icons/17cd4ee07612198a1d8777a060d4100423762a8b/icons/ruby.svg',
-    license: 'simple-icons CC0-1.0 collection; per-icon licence unspecified',
+    license: 'simple-icons CC0-1.0 collection; per-icon CC-BY-SA-2.5 (upstream data)',
     viewBox: '0 0 24 24',
     fill: '#CC342D',
     paths: [
@@ -141,7 +142,7 @@ const ICONS = Object.freeze({
   PHP: {
     source:
       'https://raw.githubusercontent.com/simple-icons/simple-icons/17cd4ee07612198a1d8777a060d4100423762a8b/icons/php.svg',
-    license: 'simple-icons CC0-1.0 collection; per-icon licence unspecified',
+    license: 'simple-icons CC0-1.0 collection; per-icon CC-BY-SA-4.0 (upstream data)',
     viewBox: '0 0 24 24',
     fill: '#777BB4',
     paths: [
