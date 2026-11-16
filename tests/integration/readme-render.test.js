@@ -8,7 +8,6 @@ import { buildTemplateContext } from '../../src/templates/index.js';
 import {
   generateBannerSvg,
   generateLanguageChartSvg,
-  generateTechStackSvg,
   renderReadme,
   validateMarkdown,
   validateSvg,
@@ -99,26 +98,64 @@ describe('generated profile README', () => {
     expect(markdown).not.toContain('<img src="assets/3d/profile-3d-contrib-purple.svg"');
   });
 
-  it('uses repository-relative image paths for every embedded image', () => {
+  it('uses repository-relative image paths for local assets and trusted HTTPS hosts for remote images', () => {
     const { markdown } = renderWith(config);
     const imageRefs = [...markdown.matchAll(/<img\s+src="([^"]+)"/g)].map((match) => match[1]);
 
     for (const ref of imageRefs) {
-      expect(ref.startsWith('assets/')).toBe(true);
+      if (ref.startsWith('assets/')) continue;
+      expect(ref.startsWith('https://skillicons.dev/')).toBe(true);
     }
-    expect(imageRefs).toHaveLength(4);
+    expect(imageRefs.filter((ref) => ref.startsWith('https://skillicons.dev/'))).toHaveLength(3);
+    expect(imageRefs.filter((ref) => ref.startsWith('assets/'))).toHaveLength(3);
   });
 
-  it('renders the configurable tech stack section', () => {
+  it('renders the configurable tech stack section with skillicons.dev URLs', () => {
     const { markdown } = renderWith(config);
 
     expect(markdown).toContain('## Tech stack');
-    expect(markdown).toContain('assets/generated/tech-stack.svg');
+    expect(markdown).toContain('skillicons.dev/icons?i=');
+    expect(markdown).not.toContain('tech-stack.svg');
+    expect(markdown).toContain(
+      'https://skillicons.dev/icons?i=nodejs,express,mysql&theme=dark&perline=3',
+    );
+    expect(markdown).toContain('https://skillicons.dev/icons?i=react,js,html&theme=dark&perline=3');
+    expect(markdown).toContain(
+      'https://skillicons.dev/icons?i=kotlin,bash,git,githubactions,vscode&theme=dark&perline=5',
+    );
     for (const group of config.profile.technology) {
       for (const item of group.items) {
-        expect(markdown).toContain(item);
+        expect(markdown).toContain(item.name);
       }
     }
+  });
+
+  it('links tech stack icons to skillicons.dev with meaningful alt text and a textual fallback', () => {
+    const { markdown } = renderWith(config);
+
+    expect(markdown).toContain(
+      '<a href="https://skillicons.dev"><img src="https://skillicons.dev/',
+    );
+    expect(markdown).toContain('alt="Backend: Node.js, Express, MySQL"');
+    expect(markdown).toContain('alt="Frontend: React, JavaScript, HTML"');
+    expect(markdown).toContain(
+      'alt="Languages &amp; tooling: Kotlin, Shell, Git, GitHub Actions, VS Code"',
+    );
+
+    // Textual fallback stays readable when remote images fail to load.
+    expect(markdown).toContain('- Node.js, Express, MySQL');
+    expect(markdown).toContain('- React, JavaScript, HTML');
+    expect(markdown).toContain('- Kotlin, Shell, Git, GitHub Actions, VS Code');
+  });
+
+  it('omits the tech stack section when it is disabled in configuration', () => {
+    const minimal = structuredClone(config);
+    minimal.rendering.sections.technology = false;
+
+    const { markdown } = renderWith(minimal);
+
+    expect(markdown).not.toContain('## Tech stack');
+    expect(markdown).not.toContain('skillicons.dev');
   });
 
   it('renders currently working on from configuration', () => {
@@ -214,21 +251,6 @@ describe('generated assets referenced by the README', () => {
     });
     const validation = validateSvg({
       svg: chart,
-      background: config.rendering.theme.colors.background,
-      width: config.rendering.layout.languageChart.width,
-    });
-
-    expect(validation.valid).toBe(true);
-  });
-
-  it('produces a valid tech stack SVG', () => {
-    const svg = generateTechStackSvg({
-      groups: config.profile.technology,
-      width: config.rendering.layout.languageChart.width,
-      colors: config.rendering.theme.colors,
-    });
-    const validation = validateSvg({
-      svg,
       background: config.rendering.theme.colors.background,
       width: config.rendering.layout.languageChart.width,
     });

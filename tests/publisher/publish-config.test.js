@@ -19,7 +19,6 @@ describe('resolvePublishTargets', () => {
       readme: 'README.md',
       banner: 'assets/generated/banner.svg',
       languageChart: 'assets/generated/languages.svg',
-      techStack: 'assets/generated/tech-stack.svg',
       stagingDirectory: 'build',
     });
   });

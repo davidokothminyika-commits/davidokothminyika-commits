@@ -2,6 +2,8 @@ import { deepFreeze } from '../utils/freeze.js';
 
 const DATE_CACHE = new Map();
 
+const SKILL_ICONS_HOST = 'https://skillicons.dev';
+
 const SOCIAL_GLYPHS = Object.freeze({
   github: '🐙',
   mail: '📧',
@@ -75,10 +77,33 @@ function summarizeLanguages(languages, limit = 8) {
     .join(', ');
 }
 
-function summarizeTechStack(groups) {
-  return (Array.isArray(groups) ? groups : [])
-    .map((group) => `${group.group}: ${Array.isArray(group.items) ? group.items.join(', ') : ''}`)
-    .join('; ');
+function buildTechStackGroups(rawGroups) {
+  if (!Array.isArray(rawGroups)) return [];
+
+  const groups = [];
+  for (const group of rawGroups) {
+    const safeItems = (Array.isArray(group?.items) ? group.items : [])
+      .filter((item) => item && typeof item.name === 'string' && typeof item.icon === 'string')
+      .map((item) => ({ name: item.name, icon: item.icon }));
+    if (safeItems.length === 0) continue;
+
+    const perline =
+      Number.isInteger(group?.perline) && group.perline > 0
+        ? Math.min(group.perline, 10)
+        : Math.min(safeItems.length, 10);
+    const names = safeItems.map((item) => item.name);
+
+    groups.push({
+      group: String(group?.group ?? '').trim(),
+      perline,
+      items: safeItems,
+      names: names.join(', '),
+      iconsUrl: `${SKILL_ICONS_HOST}/icons?i=${safeItems.map((item) => item.icon).join(',')}&theme=dark&perline=${perline}`,
+      linkUrl: SKILL_ICONS_HOST,
+      alt: `${String(group?.group ?? '').trim()}: ${names.join(', ')}`,
+    });
+  }
+  return groups;
 }
 
 /**
@@ -103,8 +128,9 @@ export function buildTemplateContext({ config, publicPayload, identity, now = ne
 
   const languagesArray = Array.isArray(languages?.languages) ? [...languages.languages] : [];
   const technologyArray = Array.isArray(config?.profile?.technology)
-    ? [...config.profile.technology]
+    ? config.profile.technology.map((group) => ({ ...group }))
     : [];
+  const techStackGroups = buildTechStackGroups(technologyArray);
   const socials = safeSocials(config?.profile?.socials);
   const currentWork = safeCurrentWork(config?.profile?.currentWork);
   const footer = config?.profile?.footer ?? null;
@@ -121,8 +147,8 @@ export function buildTemplateContext({ config, publicPayload, identity, now = ne
     socials,
     hasSocials: socials.length > 0,
     technology: technologyArray,
-    hasTechStack: technologyArray.length > 0,
-    techStackSummary: summarizeTechStack(technologyArray),
+    hasTechStack: techStackGroups.length > 0,
+    techStackGroups,
     languages: languagesArray,
     languageSummary: summarizeLanguages(languagesArray),
     statistics,
@@ -137,7 +163,6 @@ export function buildTemplateContext({ config, publicPayload, identity, now = ne
     assets: {
       banner: assets.banner ?? null,
       languageChart: assets.languageChart ?? null,
-      techStack: assets.techStack ?? null,
       threeDimensional: findTarget('midnight'),
       threeDimensionalNight: findTarget('night'),
       threeDimensionalPurple: findTarget('purple'),

@@ -32,15 +32,32 @@
   "technology": [
     {
       "group": "Backend",
-      "items": ["Node.js", "Express", "MySQL"]
+      "perline": 3,
+      "items": [
+        { "name": "Node.js", "icon": "nodejs" },
+        { "name": "Express", "icon": "express" },
+        { "name": "MySQL", "icon": "mysql" }
+      ]
     },
     {
       "group": "Frontend",
-      "items": ["React", "JavaScript", "HTML"]
+      "perline": 3,
+      "items": [
+        { "name": "React", "icon": "react" },
+        { "name": "JavaScript", "icon": "js" },
+        { "name": "HTML", "icon": "html" }
+      ]
     },
     {
       "group": "Languages & tooling",
-      "items": ["Kotlin", "Shell", "Git", "GitHub Actions", "VS Code"]
+      "perline": 5,
+      "items": [
+        { "name": "Kotlin", "icon": "kotlin" },
+        { "name": "Shell", "icon": "bash" },
+        { "name": "Git", "icon": "git" },
+        { "name": "GitHub Actions", "icon": "githubactions" },
+        { "name": "VS Code", "icon": "vscode" }
+      ]
     }
   ],
   "currentWork": {

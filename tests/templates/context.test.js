@@ -15,7 +15,13 @@ const CONFIG = {
     socials: [
       { label: 'GitHub', url: 'https://github.com/davidokothminyika-commits', icon: 'github' },
     ],
-    technology: [{ group: 'Backend', items: ['Node.js'] }],
+    technology: [
+      {
+        group: 'Backend',
+        perline: 3,
+        items: [{ name: 'Node.js', icon: 'nodejs' }],
+      },
+    ],
   },
   rendering: { timestamp: { label: 'Last updated', locale: 'en-GB', timeZone: 'Africa/Nairobi' } },
 };
@@ -70,6 +76,109 @@ describe('buildTemplateContext', () => {
     expect(context.activityComplete).toBe(true);
     expect(context.socials).toHaveLength(1);
     expect(context.technology).toHaveLength(1);
+  });
+
+  it('builds deterministic skillicons.dev groups from configuration', () => {
+    const context = buildTemplateContext({
+      config: CONFIG,
+      publicPayload: {},
+      identity: { name: 'David Okoth Minyka' },
+    });
+
+    expect(context.techStackGroups).toEqual([
+      {
+        group: 'Backend',
+        perline: 3,
+        items: [{ name: 'Node.js', icon: 'nodejs' }],
+        names: 'Node.js',
+        iconsUrl: 'https://skillicons.dev/icons?i=nodejs&theme=dark&perline=3',
+        linkUrl: 'https://skillicons.dev',
+        alt: 'Backend: Node.js',
+      },
+    ]);
+    expect(context.hasTechStack).toBe(true);
+  });
+
+  it('always emits icons under the trusted skillicons.dev host', () => {
+    const context = buildTemplateContext({
+      config: {
+        profile: {
+          technology: [
+            {
+              group: 'Backend',
+              perline: 2,
+              items: [
+                { name: 'Node.js', icon: 'nodejs' },
+                { name: 'Express', icon: 'express' },
+              ],
+            },
+          ],
+        },
+      },
+      publicPayload: {},
+      identity: { name: 'David Okoth Minyka' },
+    });
+
+    for (const group of context.techStackGroups) {
+      expect(group.iconsUrl).toMatch(/^https:\/\/skillicons\.dev\/icons\?/);
+      expect(group.iconsUrl).toContain('theme=dark');
+      expect(group.linkUrl).toBe('https://skillicons.dev');
+      expect(group.iconsUrl).not.toContain('&theme=dark&perline=3&theme=');
+    }
+  });
+
+  it('filters out malformed group items before rendering', () => {
+    const context = buildTemplateContext({
+      config: {
+        profile: {
+          technology: [
+            {
+              group: 'Backend',
+              perline: 10,
+              items: [
+                { name: 'Node.js', icon: 'nodejs' },
+                { name: 'MissingIcon' },
+                { icon: 'orphan' },
+                'not-an-object',
+                null,
+              ],
+            },
+          ],
+        },
+      },
+      publicPayload: {},
+      identity: { name: 'David Okoth Minyka' },
+    });
+
+    expect(context.techStackGroups).toHaveLength(1);
+    expect(context.techStackGroups[0].items).toEqual([{ name: 'Node.js', icon: 'nodejs' }]);
+    expect(context.techStackGroups[0].iconsUrl).toBe(
+      'https://skillicons.dev/icons?i=nodejs&theme=dark&perline=10',
+    );
+  });
+
+  it('defaults perline deterministically when omitted', () => {
+    const context = buildTemplateContext({
+      config: {
+        profile: {
+          technology: [
+            {
+              group: 'Backend',
+              items: [
+                { name: 'Node.js', icon: 'nodejs' },
+                { name: 'Express', icon: 'express' },
+                { name: 'MySQL', icon: 'mysql' },
+              ],
+            },
+          ],
+        },
+      },
+      publicPayload: {},
+      identity: { name: 'David Okoth Minyka' },
+    });
+
+    expect(context.techStackGroups[0].perline).toBe(3);
+    expect(context.techStackGroups[0].iconsUrl).toContain('perline=3');
   });
 
   it('defaults optional context fields without leaking private data', () => {

@@ -31,6 +31,20 @@ const socialUrl = z.string().refine((value) => {
 
 const socialIcon = z.enum(['github', 'mail', 'linkedin', 'x', 'globe', 'code']);
 
+const skillIcon = z.enum([
+  'nodejs',
+  'express',
+  'mysql',
+  'react',
+  'js',
+  'html',
+  'kotlin',
+  'bash',
+  'git',
+  'githubactions',
+  'vscode',
+]);
+
 const profileSchema = z
   .object({
     github: z
@@ -70,7 +84,18 @@ const profileSchema = z
         z
           .object({
             group: z.string().min(1).max(60),
-            items: z.array(z.string().min(1).max(40)).min(1).max(20),
+            perline: z.number().int().min(1).max(10).default(10),
+            items: z
+              .array(
+                z
+                  .object({
+                    name: z.string().min(1).max(40),
+                    icon: skillIcon,
+                  })
+                  .strict(),
+              )
+              .min(1)
+              .max(20),
           })
           .strict(),
       )
@@ -80,11 +105,11 @@ const profileSchema = z
         const seen = new Set();
         for (const group of groups) {
           for (const item of group.items) {
-            const key = item.toLowerCase();
+            const key = item.name.toLowerCase();
             if (seen.has(key)) {
               ctx.addIssue({
                 code: 'custom',
-                message: `Duplicate technology "${item}"`,
+                message: `Duplicate technology "${item.name}"`,
                 path: [groups.indexOf(group), 'items'],
               });
             }
@@ -291,7 +316,6 @@ const renderingSchema = z
       .object({
         banner: z.string().min(1).max(200),
         languageChart: z.string().min(1).max(200),
-        techStack: z.string().min(1).max(200),
         threeDimensional: z
           .object({
             generatorOutputDirectory: z.string().min(1).max(100),

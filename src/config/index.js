@@ -161,18 +161,11 @@ export function validateConfig(config, rootDir = PROJECT_ROOT) {
     { requireSvg: true },
   );
 
-  const techStackPath = checkPath('rendering.assets.techStack', rendering.assets.techStack, {
-    requireSvg: true,
-  });
-
   if (bannerPath && !isInside(join(rootDir, 'assets'), bannerPath)) {
     errors.push('rendering.assets.banner must be inside the assets directory');
   }
   if (languageChartPath && !isInside(join(rootDir, 'assets'), languageChartPath)) {
     errors.push('rendering.assets.languageChart must be inside the assets directory');
-  }
-  if (techStackPath && !isInside(join(rootDir, 'assets'), techStackPath)) {
-    errors.push('rendering.assets.techStack must be inside the assets directory');
   }
 
   const threeDAssetsRoot = join(rootDir, 'assets', '3d');

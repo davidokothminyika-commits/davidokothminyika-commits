@@ -35,7 +35,6 @@
   "assets": {
     "banner": "assets/generated/banner.svg",
     "languageChart": "assets/generated/languages.svg",
-    "techStack": "assets/generated/tech-stack.svg",
     "threeDimensional": {
       "generatorOutputDirectory": "profile-3d-contrib",
       "targets": [

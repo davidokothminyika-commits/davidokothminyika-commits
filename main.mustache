@@ -22,7 +22,14 @@ My name is {{name}} and today is {{date}}.
 {{#hasTechStack}}
 ## Tech stack
 
-<img src="{{{assets.techStack}}}" alt="Tech stack: {{techStackSummary}}" width="860">
+{{#techStackGroups}}
+**{{group}}**
+
+<a href="{{{linkUrl}}}"><img src="{{{iconsUrl}}}" alt="{{alt}}" /></a>
+
+- {{names}}
+
+{{/techStackGroups}}
 {{/hasTechStack}}
 {{/sections.technology}}
 

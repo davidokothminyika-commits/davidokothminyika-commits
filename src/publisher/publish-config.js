@@ -39,7 +39,6 @@ export function resolvePublishTargets(config) {
     readme: requireString(output.readme, 'rendering.output.readme'),
     banner: requireString(assets.banner, 'rendering.assets.banner'),
     languageChart: requireString(assets.languageChart, 'rendering.assets.languageChart'),
-    techStack: requireString(assets.techStack, 'rendering.assets.techStack'),
     stagingDirectory: requireString(output.stagingDirectory, 'rendering.output.stagingDirectory'),
   });
 }
