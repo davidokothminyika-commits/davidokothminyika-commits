@@ -137,7 +137,7 @@ export function buildTemplateContext({ config, publicPayload, identity, now = ne
   const hasCurrentWork = currentWorkSummary(currentWork);
 
   const context = {
-    name: identity?.name ?? null,
+    name: config?.profile?.identity?.name ?? identity?.name ?? null,
     date: formatTemplateDate(timestamp, now),
     headline: config?.profile?.identity?.headline ?? null,
     location: config?.profile?.identity?.location ?? null,

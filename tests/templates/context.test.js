@@ -78,6 +78,97 @@ describe('buildTemplateContext', () => {
     expect(context.technology).toHaveLength(1);
   });
 
+  it('prefers the configured identity name over the GitHub account name', () => {
+    const context = buildTemplateContext({
+      config: { profile: { identity: { name: 'David Okoth Minyika' } } },
+      publicPayload: {},
+      identity: { name: 'David Okoth Minyka' },
+    });
+
+    expect(context.name).toBe('David Okoth Minyika');
+  });
+
+  it('falls back to the GitHub account name when the configured name is absent', () => {
+    const context = buildTemplateContext({
+      config: { profile: { identity: {} } },
+      publicPayload: {},
+      identity: { name: 'David Okoth Minyka' },
+    });
+
+    expect(context.name).toBe('David Okoth Minyka');
+  });
+
+  it('returns null when neither configured nor GitHub name is available', () => {
+    const context = buildTemplateContext({
+      config: { profile: { identity: {} } },
+      publicPayload: {},
+      identity: {},
+    });
+
+    expect(context.name).toBeNull();
+  });
+
+  it('uses the configured name in the rendered heading and identity sentence', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { join } = await import('node:path');
+    const { loadConfig } = await import('../../src/config/index.js');
+    const { renderReadme } = await import('../../src/generators/index.js');
+    const source = readFileSync(join(process.cwd(), 'main.mustache'), 'utf8');
+    const config = loadConfig();
+    const context = buildTemplateContext({
+      config,
+      publicPayload: { statistics: null, languages: null, featured: [] },
+      identity: { name: 'David Okoth Minyka' },
+      now: new Date('2026-11-15T09:12:00Z'),
+    });
+
+    const { markdown } = renderReadme({ context, source });
+
+    expect(markdown).toContain('# David Okoth Minyika\n');
+    expect(markdown).toContain('My name is David Okoth Minyika and today is');
+    expect(markdown).not.toContain('David Okoth Minyka');
+  });
+
+  it('contains only expected public-safe fields and no unrelated identity from the account', () => {
+    const context = buildTemplateContext({
+      config: { profile: { identity: { name: 'David Okoth Minyika' } } },
+      publicPayload: {
+        statistics: {},
+        languages: { languages: [] },
+        featured: [],
+      },
+      identity: { name: 'David Okoth Minyka', login: 'davidokothminyika-commits' },
+    });
+
+    expect(context.name).toBe('David Okoth Minyika');
+    expect(Object.keys(context).sort()).toEqual(
+      [
+        'about',
+        'activity',
+        'activityComplete',
+        'assets',
+        'currentlyWorkingOn',
+        'date',
+        'featured',
+        'footer',
+        'hasActivity',
+        'hasCurrentWork',
+        'hasSocials',
+        'hasTechStack',
+        'headline',
+        'languageSummary',
+        'languages',
+        'location',
+        'name',
+        'sections',
+        'socials',
+        'statistics',
+        'techStackGroups',
+        'technology',
+      ].sort(),
+    );
+  });
+
   it('builds deterministic skillicons.dev groups from configuration', () => {
     const context = buildTemplateContext({
       config: CONFIG,
