@@ -92,6 +92,32 @@ const profileSchema = z
           }
         }
       }),
+    currentWork: z
+      .object({
+        projects: z
+          .array(
+            z
+              .object({
+                title: z.string().min(1).max(120),
+                description: z.string().min(1).max(300),
+                url: httpsUrl.optional(),
+              })
+              .strict(),
+          )
+          .max(6)
+          .default([]),
+        focus: z.array(z.string().min(1).max(400)).max(10).default([]),
+        learning: z.array(z.string().min(1).max(400)).max(10).default([]),
+      })
+      .strict()
+      .default({ projects: [], focus: [], learning: [] }),
+    footer: z
+      .object({
+        message: z.string().min(1).max(300),
+        showAttribution: z.boolean().default(true),
+      })
+      .strict()
+      .optional(),
     featured: z
       .object({
         mode: z.enum(['automatic', 'curated']),
@@ -265,6 +291,7 @@ const renderingSchema = z
       .object({
         banner: z.string().min(1).max(200),
         languageChart: z.string().min(1).max(200),
+        techStack: z.string().min(1).max(200),
         threeDimensional: z
           .object({
             generatorOutputDirectory: z.string().min(1).max(100),
@@ -293,6 +320,7 @@ const renderingSchema = z
         recentActivity: z.boolean(),
         socials: z.boolean(),
         updatedAt: z.boolean(),
+        footer: z.boolean(),
       })
       .strict(),
     timestamp: z

@@ -173,5 +173,12 @@ describe('profile collection to published asset pipeline', () => {
     expect(markdown).toContain(config.profile.identity.name);
     expect(markdown).not.toContain('secret-project');
     expect(JSON.stringify(publicPayload)).not.toContain('secret-project');
+
+    // The rendered README embeds the generated SVG assets with alt text.
+    expect(markdown).toContain('<img src="assets/generated/banner.svg"');
+    expect(markdown).toContain('<img src="assets/generated/languages.svg"');
+    expect(markdown).toContain('<img src="assets/3d/profile-3d-contrib.svg"');
+    expect(markdown).toContain('[night](assets/3d/profile-3d-contrib-night.svg)');
+    expect(markdown).toContain('[purple](assets/3d/profile-3d-contrib-purple.svg)');
   });
 });

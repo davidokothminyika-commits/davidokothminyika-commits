@@ -43,6 +43,18 @@
       "items": ["Kotlin", "Shell", "Git", "GitHub Actions", "VS Code"]
     }
   ],
+  "currentWork": {
+    "projects": [],
+    "focus": [
+      "Full-stack web applications with Node.js, Express, React, and MySQL",
+      "Learning by shipping working software: authentication flows, reservation systems, and API-driven projects"
+    ],
+    "learning": ["Node.js"]
+  },
+  "footer": {
+    "message": "Open to collaborating on Node.js and backend projects.",
+    "showAttribution": true
+  },
   "featured": {
     "mode": "automatic",
     "repositories": [],

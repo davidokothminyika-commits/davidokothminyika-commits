@@ -1,3 +1,6 @@
+{{#sections.hero}}
+<img src="{{{assets.banner}}}" alt="{{name}} — {{headline}}" width="1000">
+
 # {{name}}
 
 {{headline}}
@@ -5,35 +8,113 @@
 {{location}}
 
 My name is {{name}} and today is {{date}}.
+{{/sections.hero}}
 
+{{#sections.about}}
 ## About
 
 {{#about}}
 - {{.}}
 {{/about}}
+{{/sections.about}}
 
+{{#sections.technology}}
+{{#hasTechStack}}
+## Tech stack
+
+<img src="{{{assets.techStack}}}" alt="Tech stack: {{techStackSummary}}" width="860">
+{{/hasTechStack}}
+{{/sections.technology}}
+
+{{#sections.currentlyWorkingOn}}
+{{#hasCurrentWork}}
+## Currently working on
+
+{{#currentlyWorkingOn.projects}}
+{{#url}}- [{{title}}]({{{url}}}) — {{description}}
+{{/url}}{{^url}}- {{title}} — {{description}}
+{{/url}}
+{{/currentlyWorkingOn.projects}}
+{{#currentlyWorkingOn.focus}}
+- {{.}}
+{{/currentlyWorkingOn.focus}}
+{{#currentlyWorkingOn.learning}}
+- Learning: {{.}}
+{{/currentlyWorkingOn.learning}}
+{{/hasCurrentWork}}
+{{/sections.currentlyWorkingOn}}
+
+{{#sections.languages}}
 ## Languages
+{{#sections.languageChart}}
+
+<img src="{{{assets.languageChart}}}" alt="Language distribution: {{languageSummary}}" width="860">
+{{/sections.languageChart}}
 
 {{#languages}}
 - {{name}}: {{displayPercentage}}%
 {{/languages}}
+{{/sections.languages}}
 
+{{#sections.statistics}}
 ## Statistics
 
 - Stars: {{statistics.stars}}
 - Forks: {{statistics.forks}}
 - Contributions: {{statistics.contributions.total}}
+{{/sections.statistics}}
 
+{{#sections.featuredRepositories}}
 ## Featured repositories
 
 {{#featured}}
-- {{fullName}} — {{stars}} stars and {{forks}} forks
+- [{{{fullName}}}](https://github.com/{{{fullName}}}) — {{stars}} stars and {{forks}} forks
 {{/featured}}
+{{/sections.featuredRepositories}}
 
+{{#sections.threeDimensionalGraph}}
+## Contribution graph
+
+<img src="{{{assets.threeDimensional}}}" alt="Three-dimensional contribution graph for the last year" width="1000">
+
+Alternative themes: [night]({{{assets.threeDimensionalNight}}}) · [purple]({{{assets.threeDimensionalPurple}}})
+{{/sections.threeDimensionalGraph}}
+
+{{#sections.recentActivity}}
+{{#hasActivity}}
 ## Recent activity
 
 {{#activity}}
 - {{type}} on {{repository}} at {{createdAt}}
 {{/activity}}
+{{^activityComplete}}
+_(Feed truncated; more recent events may not appear here.)_
+{{/activityComplete}}
+{{/hasActivity}}
+{{/sections.recentActivity}}
 
-Activity complete: {{activityComplete}}
+{{#sections.socials}}
+{{#hasSocials}}
+## Connect
+
+{{#socials}}
+- {{glyph}} [{{label}}]({{{url}}})
+{{/socials}}
+{{/hasSocials}}
+{{/sections.socials}}
+
+{{#sections.footer}}
+{{#footer}}
+---
+
+{{footer.message}}
+{{#footer.showAttribution}}
+
+*Generated automatically from my GitHub activity by the automated profile pipeline.*
+{{/footer.showAttribution}}
+{{/footer}}
+{{/sections.footer}}
+
+{{#sections.updatedAt}}
+*Last updated: {{date}}*
+{{/sections.updatedAt}}

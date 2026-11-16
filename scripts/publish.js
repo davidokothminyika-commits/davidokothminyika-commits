@@ -16,6 +16,7 @@ import { buildTemplateContext } from '../src/templates/index.js';
 import {
   generateBannerSvg,
   generateLanguageChartSvg,
+  generateTechStackSvg,
   renderReadme,
   validateMarkdown,
   validateSvg,
@@ -87,6 +88,26 @@ try {
     );
   }
 
+  // Tech stack badges are generated only when groups are configured.
+  let techStackSvg = null;
+  if (context.hasTechStack) {
+    techStackSvg = generateTechStackSvg({
+      groups: config.profile.technology,
+      width: config.rendering.layout.languageChart.width,
+      colors: config.rendering.theme.colors,
+    });
+    const techStackValidation = validateSvg({
+      svg: techStackSvg,
+      background: config.rendering.theme.colors.background,
+      width: config.rendering.layout.languageChart.width,
+    });
+    if (!techStackValidation.valid) {
+      throw new PublishError(
+        `Generated tech stack failed validation: ${techStackValidation.errors.join('; ')}`,
+      );
+    }
+  }
+
   const targets = resolvePublishTargets(config);
 
   const outputs = [
@@ -94,6 +115,9 @@ try {
     { target: targets.banner, content: bannerSvg },
     { target: targets.languageChart, content: languageChartSvg },
   ];
+  if (techStackSvg !== null) {
+    outputs.push({ target: targets.techStack, content: techStackSvg });
+  }
 
   const staged = await stageOutputs({
     outputs,
