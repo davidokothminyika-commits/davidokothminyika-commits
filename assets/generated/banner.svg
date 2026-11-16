@@ -1,5 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="220" viewBox="0 0 1000 220" role="img" aria-label="Profile banner">
-  <rect width="1000" height="220" fill="#070B16"/>
-<text x="40" y="110" font-family="sans-serif" font-size="28" fill="#E2E8F0">David Okoth Minyka</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="220" viewBox="0 0 1000 220" role="img" aria-labelledby="banner-title">
+  <title id="banner-title">David Okoth Minyika — Full-stack developer · Node.js, Express, React &amp; MySQL</title>
+  <defs>
+    <linearGradient id="bannerBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070B16"/>
+      <stop offset="0.55" stop-color="#0D1526"/>
+      <stop offset="1" stop-color="#070B16"/>
+    </linearGradient>
+    <linearGradient id="topRail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="0.5" stop-color="#A78BFA"/>
+      <stop offset="1" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="shortRail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="accentLine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <radialGradient id="rightGlow" cx="0.85" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#22D3EE" stop-opacity="0.12"/>
+      <stop offset="0.45" stop-color="#A78BFA" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#070B16" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1000" height="220" fill="url(#bannerBg)"/>
+  <rect width="1000" height="220" fill="url(#rightGlow)"/>
+  <rect width="1000" height="3" fill="url(#topRail)" fill-opacity="0.85"/>
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <circle cx="878" cy="112" r="66" stroke="#22D3EE" stroke-opacity="0.22" stroke-width="1.5"/>
+    <circle cx="878" cy="112" r="38" stroke="#A78BFA" stroke-opacity="0.18" stroke-width="1.5"/>
+    <circle cx="878" cy="112" r="12" fill="#A78BFA" fill-opacity="0.5"/>
+    <path d="M716 190 L760 40 L988 124" stroke="url(#accentLine)" stroke-opacity="0.4" stroke-width="1.5"/>
+    <circle cx="716" cy="190" r="3.5" fill="#22D3EE" fill-opacity="0.7"/>
+    <circle cx="760" cy="40" r="3.5" fill="#A78BFA" fill-opacity="0.7"/>
+    <circle cx="988" cy="124" r="3.5" fill="#34D399" fill-opacity="0.75"/>
+  </g>
+  <rect x="46" y="64" width="88" height="4" rx="2" fill="url(#shortRail)"/>
+    <text x="48" y="122" font-family="ui-sans-serif, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="48" letter-spacing="1.5" fill="#E2E8F0">David Okoth Minyika</text>
+    <text x="48" y="150" font-family="ui-sans-serif, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-weight="400" font-size="13" letter-spacing="0.6" fill="#94A3B8">Full-stack developer · Node.js, Express, React &amp; MySQL</text>
+  <rect y="219" width="1000" height="1" fill="#1E293B" fill-opacity="0.9"/>
 </svg>
