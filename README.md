@@ -6,7 +6,7 @@ Full-stack developer · Node.js, Express, React &amp; MySQL
 
 Kisumu, Kenya
 
-My name is David Okoth Minyika and today is Monday, 16 November 2026 at 21:11:15 GMT+3.
+My name is David Okoth Minyika and today is Sunday, 22 November 2026 at 16:10:09 GMT+3.
 
 ## About
 
@@ -43,33 +43,33 @@ My name is David Okoth Minyika and today is Monday, 16 November 2026 at 21:11:15
 
 ## Languages
 
-<img src="assets/generated/languages.svg" alt="Language distribution: JavaScript 39.84%, HTML 36.15%, TypeScript 9.7%, Kotlin 8.86%, C 2.87%, CSS 0.85%, Shell 0.67%, EJS 0.5%" width="860">
+<img src="assets/generated/languages.svg" alt="Language distribution: JavaScript 40.86%, HTML 34.02%, TypeScript 9.83%, Kotlin 8.33%, C 2.71%, Python 1.7%, CSS 1.32%, Shell 0.63%" width="860">
 
-- JavaScript: 39.84%
-- HTML: 36.15%
-- TypeScript: 9.7%
-- Kotlin: 8.86%
-- C: 2.87%
-- CSS: 0.85%
-- Shell: 0.67%
-- EJS: 0.5%
-- Python: 0.42%
-- Makefile: 0.09%
+- JavaScript: 40.86%
+- HTML: 34.02%
+- TypeScript: 9.83%
+- Kotlin: 8.33%
+- C: 2.71%
+- Python: 1.7%
+- CSS: 1.32%
+- Shell: 0.63%
+- EJS: 0.47%
+- Makefile: 0.08%
 - Mustache: 0.05%
 - Lua: 0%
 
 ## Statistics
 
-- Stars: 5
+- Stars: 6
 - Forks: 0
-- Contributions: 328
+- Contributions: 337
 
 ## Featured repositories
 
+- [davidokothminyika-commits/KingaKikeAi](https://github.com/davidokothminyika-commits/KingaKikeAi) — 1 stars and 0 forks
 - [davidokothminyika-commits/hotelsystem](https://github.com/davidokothminyika-commits/hotelsystem) — 1 stars and 0 forks
 - [davidokothminyika-commits/nodeprs2](https://github.com/davidokothminyika-commits/nodeprs2) — 1 stars and 0 forks
-- [davidokothminyika-commits/vscodeconfig](https://github.com/davidokothminyika-commits/vscodeconfig) — 0 stars and 0 forks
-- [davidokothminyika-commits/48lawsofpower](https://github.com/davidokothminyika-commits/48lawsofpower) — 0 stars and 0 forks
+- [davidokothminyika-commits/cscIA](https://github.com/davidokothminyika-commits/cscIA) — 0 stars and 0 forks
 
 ## Contribution graph
 
@@ -79,11 +79,11 @@ Alternative themes: [night](assets/3d/profile-3d-contrib-night.svg) · [purple](
 
 ## Recent activity
 
+- CreateEvent on davidokothminyika-commits&#x2F;cscIA at 2026-11-22T12:10:51.000Z
+- WatchEvent on davidokothminyika-commits&#x2F;KingaKikeAi at 2026-11-21T20:32:57.000Z
+- PushEvent on davidokothminyika-commits&#x2F;davidokothminyika-commits at 2026-11-16T18:07:14.000Z
 - PushEvent on davidokothminyika-commits&#x2F;davidokothminyika-commits at 2026-11-16T05:46:24.000Z
 - PushEvent on davidokothminyika-commits&#x2F;davidokothminyika-commits at 2026-11-15T19:14:19.000Z
-- PushEvent on davidokothminyika-commits&#x2F;davidokothminyika-commits at 2026-10-20T12:31:37.000Z
-- PushEvent on davidokothminyika-commits&#x2F;48lawsofpower at 2026-10-20T12:25:39.000Z
-- PushEvent on davidokothminyika-commits&#x2F;hotelsystem at 2026-10-19T15:30:50.000Z
 
 ## Connect
 
@@ -96,4 +96,4 @@ Open to collaborating on Node.js and backend projects.
 
 *Generated automatically from my GitHub activity by the automated profile pipeline.*
 
-*Last updated: Monday, 16 November 2026 at 21:11:15 GMT+3*
+*Last updated: Sunday, 22 November 2026 at 16:10:09 GMT+3*
