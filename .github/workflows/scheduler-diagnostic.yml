@@ -1,0 +1,26 @@
+name: Scheduler Delivery Diagnostic
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnostic:
+    name: Scheduler Delivery Diagnostic
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Print diagnostic context
+        run: |
+          echo "SCHEDULER_DIAGNOSTIC_OK"
+          echo "UTC_TIMESTAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          echo "EVENT_NAME=${{ github.event_name }}"
+          echo "REF=${{ github.ref }}"
+          echo "REPOSITORY=${{ github.repository }}"
+          echo "RUN_ID=${{ github.run_id }}"
+          echo "RUN_NUMBER=${{ github.run_number }}"
+          echo "SHA=${{ github.sha }}"
